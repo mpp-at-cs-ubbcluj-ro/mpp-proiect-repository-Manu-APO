@@ -1,3 +1,4 @@
 rootProject.name = 'Competition'
 include 'CompetitionsModel'
+include 'CompetitionsPersistence'
 
