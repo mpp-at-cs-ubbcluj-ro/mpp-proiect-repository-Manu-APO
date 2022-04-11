@@ -63,4 +63,33 @@ public class RegistryDbRepository : IRegistryRepository
         log.InfoFormat("Exiting findOne with value {0}", null);
         return null;
     }
+
+    public Registry findRegistryByCredetials(string userName, string password)
+    {
+        log.InfoFormat("Entering findRegistryByCredetials with username= {0}, password= {1}", userName, password);
+        var con = DBUtils.getConnection();
+        using (var comm = con.CreateCommand())
+        {
+            comm.CommandText = "select * from \"Registry\" where userName=@userName and password=@password";
+            comm.Parameters.Add(new NpgsqlParameter("@userName", userName));
+            comm.Parameters.Add(new NpgsqlParameter("@password", password));
+            using (var dataR = comm.ExecuteReader())
+            {
+                if (dataR.Read())
+                {
+                    var id = dataR.GetString(0);
+                    var firstName = dataR.GetString(3);
+                    var lastName = dataR.GetString(4);
+                    var isAdmin = dataR.GetBoolean(5);
+                    var registry = new Registry(userName, password, firstName, lastName, isAdmin);
+                    registry.Id = id;
+                    log.InfoFormat("Exiting findRegistryByCredetials with value {0}", registry);
+                    return registry;
+                }
+            }
+        }
+
+        log.InfoFormat("Exiting findRegistryByCredetials with value {0}", null);
+        return null;
+    }
 }

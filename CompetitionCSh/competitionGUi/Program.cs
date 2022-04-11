@@ -1,3 +1,8 @@
+using CompetitionCSh.repository;
+using CompetitionCSh.repository.interfaces;
+using CompetitionCSh.service;
+using log4net.Config;
+
 namespace competitionGUi
 {
     internal static class Program
@@ -8,10 +13,22 @@ namespace competitionGUi
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            XmlConfigurator.Configure(new System.IO.FileInfo("App.config"));
+
+            IParticipantRepository participantDb = new ParticipantDbRepository();
+            IRegistryRepository registryDb = new RegistryDbRepository();
+            IParticipationRepository participationDb = new ParticipationDbRepository();
+            ITrialRepository trialDb = new TrialDbRepository();
+
+            CompetitionService competitionService =
+                new CompetitionService(participantDb, trialDb, registryDb, participationDb);
+
+            Application.Run(new Form1(competitionService));
         }
     }
 }

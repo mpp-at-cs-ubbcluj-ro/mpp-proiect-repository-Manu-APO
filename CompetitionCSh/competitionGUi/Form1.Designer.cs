@@ -57,7 +57,6 @@
             this.competitionLB.Size = new System.Drawing.Size(111, 25);
             this.competitionLB.TabIndex = 2;
             this.competitionLB.Text = "Competition";
-            this.competitionLB.Click += new System.EventHandler(this.label1_Click);
             // 
             // loginBT
             // 
@@ -67,6 +66,7 @@
             this.loginBT.TabIndex = 3;
             this.loginBT.Text = "LOGIN";
             this.loginBT.UseVisualStyleBackColor = true;
+            this.loginBT.Click += new System.EventHandler(this.loginBT_Click);
             // 
             // Form1
             // 

@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CompetitionCSh.domain.dto.ParticipationDTO" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAACAAAAAAAAAAECIAAAAAAAAA=</HashCode>
+      <FileName>domain\dto\ParticipationDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.domain.dto.TrialDTO" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAABAAAAAAASAAgAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>domain\dto\TrialDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.domain.entities.Competition" BaseTypeListCollapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAAAAgAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>domain\entities\Competition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.domain.entities.Participant">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>domain\entities\Participant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CompetitionCSh.domain.entities.Participation" BaseTypeListCollapsed="true">
+    <Position X="10" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAAAAAAAAAAAAAAAAAAAAAACCCAAAAAAAA=</HashCode>
+      <FileName>domain\entities\Participation.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.domain.entities.Registry">
+    <Position X="1.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>domain\entities\Registry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CompetitionCSh.domain.entities.SystemUser">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAEAAAAAAAAAAAAAAACAQAAAAAAAAg=</HashCode>
+      <FileName>domain\entities\SystemUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CompetitionCSh.domain.entities.Trial" BaseTypeListCollapsed="true">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAACAAAAABAAAAAAASAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>domain\entities\Trial.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.repository.ParticipantDbRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAACQCAEAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>repository\ParticipantDbRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.repository.ParticipationDbRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAACQCAEAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>repository\ParticipationDbRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.repository.RegistryDbRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAACQCAEAAAAAAAAAAAAAAEAAg=</HashCode>
+      <FileName>repository\RegistryDbRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.repository.TrialDbRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAACQCAEAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>repository\TrialDbRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CompetitionCSh.service.CompetitionService" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAACAAIAAAAg=</HashCode>
+      <FileName>service\CompetitionService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CompetitionCSh.utils.DBUtils" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>utils\DBUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CompetitionCSh.Program" Collapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CompetitionCSh.domain.interfaces.IHasId&lt;TID&gt;" Collapsed="true">
+    <Position X="10.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>domain\interfaces\IHasId.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CompetitionCSh.repository.interfaces.ICrudRepository&lt;ID, E&gt;" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAQCAEAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>repository\interfaces\ICrudRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CompetitionCSh.repository.interfaces.IParticipantRepository" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>repository\interfaces\IParticipantRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CompetitionCSh.repository.interfaces.IParticipationRepository" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>repository\interfaces\IParticipationRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CompetitionCSh.repository.interfaces.IRegistryRepository" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>repository\interfaces\IRegistryRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CompetitionCSh.repository.interfaces.ITrialRepository" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>repository\interfaces\ITrialRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="CompetitionCSh.domain.enums.AGE_CATEGORY">
+    <Position X="12.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>domain\enums\AGE_CATEGORY.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CompetitionCSh.domain.enums.TRIAL_TYPE">
+    <Position X="12.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAEAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>domain\enums\TRIAL_TYPE.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

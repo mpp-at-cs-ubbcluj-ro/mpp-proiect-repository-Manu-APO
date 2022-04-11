@@ -5,6 +5,7 @@ C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competit
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\ConnectionUtils.exe
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\CompetitionCSh.exe
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\competitionGUi.exe
+C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\competitionGUi.dll.config
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\competitionGUi.deps.json
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\competitionGUi.runtimeconfig.json
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\competitionGUi.dll
@@ -17,6 +18,7 @@ C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competit
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\CompetitionCSh.dll.config
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\bin\Debug\net6.0-windows\ConnectionUtils.pdb
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\obj\Debug\net6.0-windows\competitionGUi.csproj.AssemblyReference.cache
+C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\obj\Debug\net6.0-windows\competitionGUi.Dashboard.resources
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\obj\Debug\net6.0-windows\competitionGUi.Form1.resources
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\obj\Debug\net6.0-windows\competitionGUi.csproj.GenerateResource.cache
 C:\Users\Manuel\Desktop\ubb\2021-2022\Sem VI\MPP\Project\CompetitionCSh\competitionGUi\obj\Debug\net6.0-windows\competitionGUi.GeneratedMSBuildEditorConfig.editorconfig
