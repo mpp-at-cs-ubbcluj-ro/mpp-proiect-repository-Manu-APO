@@ -94,7 +94,7 @@ public class ParticipantDbRepository implements ParticipantRepository {
         logger.traceEntry("Update participant with id {} with {}", id, newEntity);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("update \"Participant\" set \"username\"=?, \"password\"=?, \"firstName\"=? ,\"lastName\" =? where \"id\"=?")){
+        try(PreparedStatement preparedStatement = con.prepareStatement("update \"Participant\" set \"username\"=?, \"password\"=?, \"firstName\"=? ,\"lastName\" =? where \"id\"=? returning *")){
             preparedStatement.setString(1, newEntity.getUsername());
             preparedStatement.setString(2, newEntity.getPassword());
             preparedStatement.setString(3, newEntity.getFirstName());
@@ -130,7 +130,7 @@ public class ParticipantDbRepository implements ParticipantRepository {
         logger.traceEntry("Delete participant with id {}", id);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("delete from \"Participant\" where \"id\"=?")){
+        try(PreparedStatement preparedStatement = con.prepareStatement("delete from \"Participant\" where \"id\"=? returning *")){
             preparedStatement.setLong(1, id);
             try(ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {

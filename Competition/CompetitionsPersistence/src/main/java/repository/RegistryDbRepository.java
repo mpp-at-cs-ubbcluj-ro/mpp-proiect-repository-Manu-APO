@@ -29,7 +29,7 @@ public class RegistryDbRepository implements RegistryRepository{
         logger.traceEntry("Saving registry {}", entity);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("insert into \"Registry\"(\"username\",\"password\",\"firstName\",\"lastName\",\"isAdmin\") values (?,?,?,?,?)")){
+        try(PreparedStatement preparedStatement = con.prepareStatement("insert into \"Registry\"(\"username\",\"password\",\"firstName\",\"lastName\",\"isAdmin\") values (?,?,?,?,?) returning *")){
             preparedStatement.setString(1,entity.getUsername());
             preparedStatement.setString(2,entity.getPassword());
             preparedStatement.setString(3,entity.getFirstName());

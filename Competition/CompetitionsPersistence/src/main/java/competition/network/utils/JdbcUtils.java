@@ -22,40 +22,37 @@ public class JdbcUtils {
     private  Connection instance=null;
 
     private Connection getNewConnection(){
-        logger.traceEntry();
+        logger.traceEntry("Receiving database new connection");
 
         String url=jdbcProps.getProperty("jdbc.url");
-
         String user=jdbcProps.getProperty("jdbc.user");
         String pass=jdbcProps.getProperty("jdbc.pass");
-        logger.info("trying to connect to database ... {}",url);
-        logger.info("user: {}",user);
-        logger.info("pass: {}", pass);
-        Connection con=null;
+
+        Connection connection = null;
         try {
 
             if (user!=null && pass!=null)
-                con= DriverManager.getConnection(url,user,pass);
+                connection= DriverManager.getConnection(url,user,pass);
             else
-                con=DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            logger.error(e);
-            System.out.println("Error getting connection "+e);
+                connection=DriverManager.getConnection(url);
+        } catch (SQLException throwables) {
+            logger.error("Error getting connection: "+throwables);
+            System.out.println(throwables);
         }
-        return con;
+        return connection;
     }
 
     public Connection getConnection(){
-        logger.traceEntry();
+        logger.traceEntry("Receiving database connection");
         try {
             if (instance==null || instance.isClosed())
                 instance=getNewConnection();
 
-        } catch (SQLException e) {
-            logger.error(e);
-            System.out.println("Error DB "+e);
+        } catch (SQLException throwables) {
+            logger.error("Error DB: " + throwables);
+            System.out.println(throwables);
         }
-        logger.traceExit(instance);
+        logger.traceExit("Connection received: " + instance);
         return instance;
     }
 }

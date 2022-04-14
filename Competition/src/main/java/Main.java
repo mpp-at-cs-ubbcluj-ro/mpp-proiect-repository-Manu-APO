@@ -17,15 +17,10 @@ public class Main {
             // load a properties file
             prop.load(input);
 
-            // get the property value and print it out
-            System.out.println(prop.getProperty("jdbc.url"));
-            System.out.println(prop.getProperty("jdbc.user"));
-            System.out.println(prop.getProperty("jdbc.pass"));
-
             ParticipantRepository repo = new ParticipantDbRepository(prop);
             repo.findAll().forEach(System.out::println);
 
-            repo.add(new Participant("miiy3333","parola4","Ion","Marcel"));
+//            repo.add(new Participant("miiiy3333","parola4","Ion","Marcel"));
 
         } catch (IOException ex) {
             ex.printStackTrace();

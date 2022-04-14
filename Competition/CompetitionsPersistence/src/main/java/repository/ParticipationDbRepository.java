@@ -27,7 +27,7 @@ public class ParticipationDbRepository implements ParticipationRepository{
         logger.traceEntry("Saving participation {}", entity);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("insert into \"Participation\"(\"participantId\",\"trialId\",\"dateOfSubmission\",\"registryId\") values (?,?,?,?)")){
+        try(PreparedStatement preparedStatement = con.prepareStatement("insert into \"Participation\"(\"participantId\",\"trialId\",\"dateOfSubmission\",\"registryId\") values (?,?,?,?) returning *")){
             preparedStatement.setLong(1, entity.getParticipantId());
             preparedStatement.setLong(2, entity.getTrialId());
             preparedStatement.setTimestamp(3, new Timestamp(entity.getDateOfSubmission().getTime()));
