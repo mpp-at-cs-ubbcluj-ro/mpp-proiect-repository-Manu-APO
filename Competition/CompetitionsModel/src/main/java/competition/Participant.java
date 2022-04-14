@@ -2,8 +2,8 @@ package competition;
 
 public class Participant extends SystemUser {
 
-    public Participant(String userName, String password, String firstName, String lastName) {
-        super(userName, password, firstName, lastName);
+    public Participant(String username, String password, String firstName, String lastName) {
+        super(username, password, firstName, lastName);
     }
 
     @Override

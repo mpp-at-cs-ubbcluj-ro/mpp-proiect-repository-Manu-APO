@@ -25,6 +25,8 @@ public class Main {
             ParticipantRepository repo = new ParticipantDbRepository(prop);
             repo.findAll().forEach(System.out::println);
 
+            repo.add(new Participant("miiy3333","parola4","Ion","Marcel"));
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }

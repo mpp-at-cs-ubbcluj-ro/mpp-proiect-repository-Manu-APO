@@ -4,12 +4,12 @@ public class Registry extends SystemUser {
 
     private boolean isAdmin;
 
-    public Registry(String userName, String password, String firstName, String lastName, boolean isAdmin) {
-        super(userName, password, firstName, lastName);
+    public Registry(String username, String password, String firstName, String lastName, boolean isAdmin) {
+        super(username, password, firstName, lastName);
         this.isAdmin = isAdmin;
     }
 
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 

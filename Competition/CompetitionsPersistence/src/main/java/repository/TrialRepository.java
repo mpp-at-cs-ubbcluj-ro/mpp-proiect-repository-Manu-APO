@@ -1,8 +1,8 @@
 package repository;
 
-import competition.Trial;
+import competition.TrialDTO;
 
-public interface TrialRepository extends RepositoryCrud<Long, Trial> {
+public interface TrialRepository extends RepositoryCrud<Long, TrialDTO> {
 
 }
 

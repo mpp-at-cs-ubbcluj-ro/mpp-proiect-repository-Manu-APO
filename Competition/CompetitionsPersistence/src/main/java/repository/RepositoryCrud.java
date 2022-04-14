@@ -3,10 +3,10 @@ package repository;
 
 public interface RepositoryCrud<ID,T> {
 
-    T add(T e);
+    T add(T entity);
     Iterable<T> findAll();
-    T update(ID id, T e2);
-    T delete(ID e);
+    T update(ID id, T newEntity);
+    T delete(ID id);
     T findOne(ID id);
 
 }

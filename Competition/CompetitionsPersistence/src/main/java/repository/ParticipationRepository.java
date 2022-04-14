@@ -1,8 +1,8 @@
 package repository;
 
-import competition.Participation;
+import competition.ParticipationDTO;
 
-public interface ParticipationRepository extends RepositoryCrud<Long, Participation> {
+public interface ParticipationRepository extends RepositoryCrud<Long, ParticipationDTO> {
 
 }
 
