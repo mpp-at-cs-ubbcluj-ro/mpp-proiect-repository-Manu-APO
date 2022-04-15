@@ -16,6 +16,15 @@ public class TrialDTO implements HasId<Long>, Serializable {
     private Date endDate;
 
 
+    public TrialDTO(Long parentCompetitionId, int maxNumberOfParticipants, TRIAL_TYPE trialType, AGE_CATEGORY ageCategory, Date startDate, Date endDate) {
+        this.parentCompetitionId = parentCompetitionId;
+        this.maxNumberOfParticipants = maxNumberOfParticipants;
+        this.trialType = trialType;
+        this.ageCategory = ageCategory;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -24,15 +33,6 @@ public class TrialDTO implements HasId<Long>, Serializable {
     @Override
     public void setId(Long newId) {
         this.id = newId;
-    }
-
-    public TrialDTO(Long parentCompetitionId, int maxNumberOfParticipants, TRIAL_TYPE trialType, AGE_CATEGORY ageCategory, Date startDate, Date endDate) {
-        this.parentCompetitionId = parentCompetitionId;
-        this.maxNumberOfParticipants = maxNumberOfParticipants;
-        this.trialType = trialType;
-        this.ageCategory = ageCategory;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public Long getParentCompetitionId() {

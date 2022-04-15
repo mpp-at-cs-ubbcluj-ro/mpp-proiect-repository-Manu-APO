@@ -12,9 +12,8 @@ import java.util.Properties;
 @Component
 public class CompetitionDbRepository implements CompetitionRepository {
 
+    private static final Logger logger = LogManager.getLogger();
     private JdbcUtils dbUtils;
-
-    private static final Logger logger= LogManager.getLogger();
 
     @Autowired
     public CompetitionDbRepository(Properties properties) {

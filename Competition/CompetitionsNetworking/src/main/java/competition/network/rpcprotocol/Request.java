@@ -7,7 +7,8 @@ public class Request implements Serializable {
     private RequestType type;
     private Object data;
 
-    private Request(){}
+    private Request() {
+    }
 
     public RequestType type() {
         return type;
@@ -25,27 +26,30 @@ public class Request implements Serializable {
                 '}';
     }
 
-    public static class Builder{
-        private Request request = new Request();
-
-        public Builder type(RequestType type){//contruieste un type
-            request.type(type);
-            return this;
-        }
-        public Builder data(Object data){//construieste o data
-            request.data(data);
-            return this;
-        }
-
-        public Request build(){return  request;} //construieste/returneaza cererea
-    }
-
     private void type(RequestType type) {
         this.type = type;
     }
 
     private void data(Object data) {
         this.data = data;
+    }
+
+    public static class Builder {
+        private Request request = new Request();
+
+        public Builder type(RequestType type) {//contruieste un type
+            request.type(type);
+            return this;
+        }
+
+        public Builder data(Object data) {//construieste o data
+            request.data(data);
+            return this;
+        }
+
+        public Request build() {
+            return request;
+        } //construieste/returneaza cererea
     }
 }
 

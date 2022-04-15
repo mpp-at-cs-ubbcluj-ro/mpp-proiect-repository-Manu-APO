@@ -1,9 +1,9 @@
 package repository;
 
 import competition.Registry;
+import competition.network.utils.JdbcUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import competition.network.utils.JdbcUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,13 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class RegistryDbRepository implements RegistryRepository{
+public class RegistryDbRepository implements RegistryRepository {
 
+    private static final Logger logger = LogManager.getLogger();
     private JdbcUtils dbUtils;
 
-    private static final Logger logger= LogManager.getLogger();
-
-    public RegistryDbRepository(Properties properties){
+    public RegistryDbRepository(Properties properties) {
         logger.info("Initializing RegistryDbRepository with properties {}", properties);
         dbUtils = new JdbcUtils(properties);
     }
@@ -29,14 +28,14 @@ public class RegistryDbRepository implements RegistryRepository{
         logger.traceEntry("Saving registry {}", entity);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("insert into \"Registry\"(\"username\",\"password\",\"firstName\",\"lastName\",\"isAdmin\") values (?,?,?,?,?) returning *")){
-            preparedStatement.setString(1,entity.getUsername());
-            preparedStatement.setString(2,entity.getPassword());
-            preparedStatement.setString(3,entity.getFirstName());
-            preparedStatement.setString(4,entity.getLastName());
-            preparedStatement.setBoolean(5,entity.getIsAdmin());
+        try (PreparedStatement preparedStatement = con.prepareStatement("insert into \"Registry\"(\"username\",\"password\",\"firstName\",\"lastName\",\"isAdmin\") values (?,?,?,?,?) returning *")) {
+            preparedStatement.setString(1, entity.getUsername());
+            preparedStatement.setString(2, entity.getPassword());
+            preparedStatement.setString(3, entity.getFirstName());
+            preparedStatement.setString(4, entity.getLastName());
+            preparedStatement.setBoolean(5, entity.getIsAdmin());
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Long id = resultSet.getLong("id");
                     String username = resultSet.getString("username");
@@ -83,7 +82,7 @@ public class RegistryDbRepository implements RegistryRepository{
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
 
         logger.traceExit("Exiting finding all registries {}", registries);
@@ -126,7 +125,7 @@ public class RegistryDbRepository implements RegistryRepository{
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
         logger.traceExit("Exiting finding registry with id {}", id);
         return null;
@@ -158,7 +157,7 @@ public class RegistryDbRepository implements RegistryRepository{
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
         logger.traceExit("Exiting finding registry by credentials");
         return null;

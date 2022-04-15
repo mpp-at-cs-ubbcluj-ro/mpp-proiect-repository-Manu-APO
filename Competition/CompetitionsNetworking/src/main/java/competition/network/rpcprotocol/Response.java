@@ -7,26 +7,29 @@ public class Response implements Serializable {
     private ResponseType type;
     private Object data;
 
-    private Response(){};
+    private Response() {
+    }
 
-    public ResponseType type(){
+    ;
+
+    public ResponseType type() {
         return type;
     }
 
-    public Object data(){
+    public Object data() {
         return data;
     }
 
-    private void type(ResponseType type){
-        this.type=type;
+    private void type(ResponseType type) {
+        this.type = type;
     }
 
-    private void data(Object data){
-        this.data=data;
+    private void data(Object data) {
+        this.data = data;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Response{" +
                 "type='" + type + '\'' +
                 ", data='" + data + '\'' +
@@ -34,8 +37,8 @@ public class Response implements Serializable {
     }
 
 
-    public static class Builder{
-        private Response response=new Response();
+    public static class Builder {
+        private Response response = new Response();
 
         public Builder type(ResponseType type) {
             response.type(type);

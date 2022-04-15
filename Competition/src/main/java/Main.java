@@ -1,4 +1,3 @@
-import competition.Participant;
 import repository.ParticipantDbRepository;
 import repository.ParticipantRepository;
 

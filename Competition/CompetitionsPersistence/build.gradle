@@ -10,12 +10,12 @@ repositories {
 }
 
 dependencies {
-    implementation  project(':CompetitionsModel')
+    implementation project(':CompetitionsModel')
 
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.19'
 
-    implementation  group: 'org.apache.logging.log4j', name: 'log4j-core', version:'2.14.0'
-    implementation  group: 'org.apache.logging.log4j', name: 'log4j-api', version:'2.14.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
     implementation 'org.hibernate:hibernate-core:6.0.0.Final'
 
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'

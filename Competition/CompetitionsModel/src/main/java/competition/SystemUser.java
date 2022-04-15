@@ -14,6 +14,16 @@ public class SystemUser implements HasId<Long>, Serializable {
     private String lastName;
 
 
+    public SystemUser() {
+    }
+
+    public SystemUser(String username, String password, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -22,13 +32,6 @@ public class SystemUser implements HasId<Long>, Serializable {
     @Override
     public void setId(Long newId) {
         this.id = newId;
-    }
-
-    public SystemUser(String username, String password, String firstName, String lastName) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
     public String getUsername() {

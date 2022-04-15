@@ -1,6 +1,6 @@
 package competition.network.utils;
 
-public class ServerException extends Exception{
+public class ServerException extends Exception {
 
     public ServerException() {
         super();

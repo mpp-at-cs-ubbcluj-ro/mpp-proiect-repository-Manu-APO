@@ -12,6 +12,13 @@ public class Participation implements HasId<Long>, Serializable {
     private Date dateOfSubmission;
     private Registry registry;
 
+    public Participation(Participant participant, Trial trial, Date dateOfSubmission, Registry registry) {
+        this.participant = participant;
+        this.trial = trial;
+        this.dateOfSubmission = dateOfSubmission;
+        this.registry = registry;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -20,13 +27,6 @@ public class Participation implements HasId<Long>, Serializable {
     @Override
     public void setId(Long newId) {
         this.id = newId;
-    }
-
-    public Participation(Participant participant, Trial trial, Date dateOfSubmission, Registry registry) {
-        this.participant = participant;
-        this.trial = trial;
-        this.dateOfSubmission = dateOfSubmission;
-        this.registry = registry;
     }
 
     public Participant getParticipant() {

@@ -1,9 +1,9 @@
 package repository;
 
 import competition.Participant;
+import competition.network.utils.JdbcUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import competition.network.utils.JdbcUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,11 +15,10 @@ import java.util.Properties;
 
 public class ParticipantDbRepository implements ParticipantRepository {
 
+    private static final Logger logger = LogManager.getLogger();
     private JdbcUtils dbUtils;
 
-    private static final Logger logger= LogManager.getLogger();
-
-    public ParticipantDbRepository(Properties properties){
+    public ParticipantDbRepository(Properties properties) {
         logger.info("Initializing ParticipantDbRepository with properties {}", properties);
         dbUtils = new JdbcUtils(properties);
     }
@@ -30,13 +29,13 @@ public class ParticipantDbRepository implements ParticipantRepository {
         logger.traceEntry("Saving participant {}", entity);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("insert into \"Participant\"(\"username\",\"password\",\"firstName\",\"lastName\") values (?,?,?,?) returning *")){
-            preparedStatement.setString(1,entity.getUsername());
-            preparedStatement.setString(2,entity.getPassword());
-            preparedStatement.setString(3,entity.getFirstName());
-            preparedStatement.setString(4,entity.getLastName());
+        try (PreparedStatement preparedStatement = con.prepareStatement("insert into \"Participant\"(\"username\",\"password\",\"firstName\",\"lastName\") values (?,?,?,?) returning *")) {
+            preparedStatement.setString(1, entity.getUsername());
+            preparedStatement.setString(2, entity.getPassword());
+            preparedStatement.setString(3, entity.getFirstName());
+            preparedStatement.setString(4, entity.getLastName());
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Long id = resultSet.getLong("id");
                     String username = resultSet.getString("username");
@@ -81,7 +80,7 @@ public class ParticipantDbRepository implements ParticipantRepository {
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
 
         logger.traceExit("Exiting finding all participants {}", participants);
@@ -94,16 +93,16 @@ public class ParticipantDbRepository implements ParticipantRepository {
         logger.traceEntry("Update participant with id {} with {}", id, newEntity);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("update \"Participant\" set \"username\"=?, \"password\"=?, \"firstName\"=? ,\"lastName\" =? where \"id\"=? returning *")){
+        try (PreparedStatement preparedStatement = con.prepareStatement("update \"Participant\" set \"username\"=?, \"password\"=?, \"firstName\"=? ,\"lastName\" =? where \"id\"=? returning *")) {
             preparedStatement.setString(1, newEntity.getUsername());
             preparedStatement.setString(2, newEntity.getPassword());
             preparedStatement.setString(3, newEntity.getFirstName());
             preparedStatement.setString(4, newEntity.getLastName());
             preparedStatement.setLong(5, newEntity.getId());
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    if (resultSet.getLong("id") == id){
+                    if (resultSet.getLong("id") == id) {
                         String username = resultSet.getString("username");
                         String password = resultSet.getString("password");
                         String firstName = resultSet.getString("firstName");
@@ -119,7 +118,7 @@ public class ParticipantDbRepository implements ParticipantRepository {
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
         logger.traceExit("Exiting updating participant with id {}", id);
         return null;
@@ -130,11 +129,11 @@ public class ParticipantDbRepository implements ParticipantRepository {
         logger.traceEntry("Delete participant with id {}", id);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("delete from \"Participant\" where \"id\"=? returning *")){
+        try (PreparedStatement preparedStatement = con.prepareStatement("delete from \"Participant\" where \"id\"=? returning *")) {
             preparedStatement.setLong(1, id);
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    if (resultSet.getLong("id") == id){
+                    if (resultSet.getLong("id") == id) {
                         String username = resultSet.getString("username");
                         String password = resultSet.getString("password");
                         String firstName = resultSet.getString("firstName");
@@ -150,7 +149,7 @@ public class ParticipantDbRepository implements ParticipantRepository {
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
         logger.traceExit("Exiting deleting participant with id {}", id);
         return null;
@@ -180,7 +179,7 @@ public class ParticipantDbRepository implements ParticipantRepository {
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
         logger.traceExit("Exiting finding participant with id {}", id);
         return null;
@@ -211,7 +210,7 @@ public class ParticipantDbRepository implements ParticipantRepository {
             }
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB: "+throwable);
+            System.err.println("Error DB: " + throwable);
         }
         logger.traceExit("Exiting finding participant by credentials");
         return null;

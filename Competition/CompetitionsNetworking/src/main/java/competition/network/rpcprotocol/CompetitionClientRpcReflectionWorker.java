@@ -11,21 +11,22 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
+import java.rmi.RemoteException;
 
-public class CompetitionClientRpcReflectionWorker implements Runnable , ICompetitionObserver {
+public class CompetitionClientRpcReflectionWorker implements Runnable, ICompetitionObserver {
 
+    private static Response okResponse = new Response.Builder().type(ResponseType.OK).build();
     private ICompetitionServices server;    // care e serviciul nostru implementat
     private Socket connection;
     private ObjectInputStream input;        // pentru a citi (read) de pe socket
     private ObjectOutputStream output;      // pentru a scrie pe socket
-    private volatile boolean connected;     // pentru a lua informatia din memorie nu din memoria cache
     // variabila e folosita de mai multe threaduri
-
+    private volatile boolean connected;     // pentru a lua informatia din memorie nu din memoria cache
 
     public CompetitionClientRpcReflectionWorker(ICompetitionServices server, Socket connection) {
         this.server = server;
         this.connection = connection;
-        try{
+        try {
             output = new ObjectOutputStream(connection.getOutputStream());
             output.flush();
             input = new ObjectInputStream(connection.getInputStream());
@@ -39,11 +40,11 @@ public class CompetitionClientRpcReflectionWorker implements Runnable , ICompeti
     @Override
     public void run() {
 
-        while(connected){
-            try{
+        while (connected) {
+            try {
                 Object request = input.readObject(); //citeste un obiect de pe socket
-                Response response = handleRequest((Request)request);//trateaza cererea corespunzatoare
-                if(response != null){
+                Response response = handleRequest((Request) request);//trateaza cererea corespunzatoare
+                if (response != null) {
                     sendResponse(response);//trimite un raspuns
                 }
 
@@ -65,30 +66,28 @@ public class CompetitionClientRpcReflectionWorker implements Runnable , ICompeti
             output.close();
             connection.close();
         } catch (IOException e) {
-            System.out.println("Error : "+e);
+            System.out.println("Error : " + e);
         }
 
 
     }
 
     private void sendResponse(Response response) throws IOException {
-        System.out.println("sending response"+response);
-        synchronized (output){
+        System.out.println("sending response" + response);
+        synchronized (output) {
             output.writeObject(response);
             output.flush();
         }
 
     }
 
-    private static Response okResponse = new Response.Builder().type(ResponseType.OK).build();
-
     private Response handleRequest(Request request) {
         Response response = null;
-        String handlerName = "handle"+(request).type();
-        System.out.println("HandlerName : "+handlerName);
+        String handlerName = "handle" + (request).type();
+        System.out.println("HandlerName : " + handlerName);
         try {
-            Method method = this.getClass().getDeclaredMethod(handlerName,Request.class);
-            response = (Response)method.invoke(this,request);
+            Method method = this.getClass().getDeclaredMethod(handlerName, Request.class);
+            response = (Response) method.invoke(this, request);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -100,12 +99,12 @@ public class CompetitionClientRpcReflectionWorker implements Runnable , ICompeti
         return response;
     }
 
-    private Response handleLOGIN(Request request){
+    private Response handleLOGIN(Request request) {
         System.out.println("Login request worker...");
-        SystemUser systemUser = (SystemUser)request.data();
+        SystemUser systemUser = (SystemUser) request.data();
         System.out.println("systemUser in handle login" + systemUser);
-        try{
-            server.login(systemUser,this);
+        try {
+            server.login(systemUser, this);
 
             return okResponse;
         } catch (CompetitionException e) {
@@ -114,30 +113,20 @@ public class CompetitionClientRpcReflectionWorker implements Runnable , ICompeti
         }
     }
 
+    private Response handlePARTICIPANTS_DTO(Request request) {
+        System.out.println("getAllTrialsDto worker...");
+        try {
+            return new Response.Builder().type(ResponseType.GET_TRIALS_DTO).data(server.getAllTrialsDTO()).build();
+        } catch (CompetitionException e) {
+            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+        }
+    }
 
-//    private Response handlePARTICIPANTS_DTO(Request request){
-//        System.out.println("getAllParticipantsDto worker...");
-//        try{
-//            return new Response.Builder().type(ResponseType.GET_PARTICIPANTS_DTO).data(server.getAllParticipantsDto()).build();
-//        } catch (CompetitionException e) {
-//            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
-//        }
-//    }
-//
-//    private Response handleATHLETIC_TEST_DTO(Request request){
-//        System.out.println("getAllAthletiTestDto worker..");
-//        try {
-//            return new Response.Builder().type(ResponseType.GET_ATHLETIC_TEST_DTO).data(server.getAllAthleticTestDto()).build();
-//        } catch (CompetitionException e) {
-//            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
-//        }
-//    }
-
-    private Response handleLOGOUT(Request request){
+    private Response handleLOGOUT(Request request) {
         System.out.println("Logout worker...");
         SystemUser systemUser = (SystemUser) request.data();
         try {
-            server.logout(systemUser,this);
+            server.logout(systemUser, this);
             connected = false;
             return okResponse;
 
@@ -146,60 +135,9 @@ public class CompetitionClientRpcReflectionWorker implements Runnable , ICompeti
         }
     }
 
-
-
-//    private Response handleFIND_ALL_PARTICIPANTS_TEST_LEGTH_AND_AGE(Request request){
-//        System.out.println("FindAllParticipantsByTestLengthAndAge worker ...");
-//        AthleticTest athleticTest = (AthleticTest) request.data();
-//        try {
-//            Iterable<Participant> participants = server.findAllParticipantsByTestLegthAndAge(athleticTest.getTestLength(),athleticTest.getMinAge(),athleticTest.getMaxAge());
-//            return new Response.Builder().type(ResponseType.GET_FIND_ALL_PARTICIPANTS_TEST_LEGTH_AND_AGE).data(participants).build();
-//        } catch (AthleticsException e) {
-//            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
-//        }
-//
-//    }
-//
-//    private Response handleADD_PARTICIPANT_WITH_RETURNING(Request request){
-//        System.out.println("Add participant with returning working ...");
-//        Participant participant = (Participant) request.data();
-//        try{
-//            Participant participantAdded = server.addParticipantWithReturning(participant);
-//            return new Response.Builder().type(ResponseType.GET_ADD_PARTICIPANT_WITH_RETURNING).data(participantAdded).build();
-//
-//        } catch (CompetitionException e) {
-//            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
-//        }
-//    }
-//
-//    private Response handleFIND_ATHLETIC_TEST_BY_TEST_LENGTH_AND_AGE(Request request){
-//        System.out.println("find athletic test bu test length and age wroker ...");
-//        AthleticTest athleticTest = (AthleticTest) request.data();
-//
-//        try {
-//            AthleticTest athleticTestReturned = server.findAthleticTestByTestLengthAndAge(athleticTest.getTestLength(),athleticTest.getMinAge(),athleticTest.getMaxAge());
-//            return new Response.Builder().type(ResponseType.GET_FIND_ATHLETIC_TEST_BY_TEST_LENGTH_AND_AGE).data(athleticTestReturned).build();
-//        } catch (CompetitionException e) {
-//            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
-//        }
-//
-//    }
-//
-//    private Response handleADD_ENTRY(Request request){
-//        System.out.println("add entry worker ...");
-//        Entry entry = (Entry) request.data();
-//
-//        try {
-//            server.addEntry(entry);
-//            return okResponse;
-//        } catch (CompetitionException e) {
-//            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
-//        }
-//    }
-//
     @Override
-    public void updateParticipantsDtoAthleticTestsDto() throws CompetitionException {
-        Response response = new Response.Builder().type(ResponseType.GET_UPDATE_PARTICIPANTS_DTO_ATHLETIC_TESTS_DTO).build();
+    public void updateTrialsDto() throws CompetitionException, RemoteException {
+        Response response = new Response.Builder().type(ResponseType.GET_UPDATE_TRIALS_DTO).build();
         System.out.println("update interfaces worker ...");
         try {
             sendResponse(response);

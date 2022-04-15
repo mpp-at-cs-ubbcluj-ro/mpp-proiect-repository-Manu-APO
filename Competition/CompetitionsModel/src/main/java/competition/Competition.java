@@ -11,6 +11,11 @@ public class Competition implements HasId<Long>, Serializable {
     private Date endDate;
 
 
+    public Competition(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -19,11 +24,6 @@ public class Competition implements HasId<Long>, Serializable {
     @Override
     public void setId(Long newId) {
         this.id = newId;
-    }
-
-    public Competition(Date startDate, Date endDate) {
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public Date getStartDate() {

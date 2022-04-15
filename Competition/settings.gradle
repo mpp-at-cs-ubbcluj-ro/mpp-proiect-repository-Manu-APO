@@ -4,4 +4,5 @@ include 'CompetitionsPersistence'
 include 'CompetitionsClientFX'
 include 'CompetitionsServices'
 include 'CompetitionsNetworking'
+include 'CompetitionsServer'
 

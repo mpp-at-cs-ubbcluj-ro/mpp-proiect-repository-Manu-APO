@@ -1,6 +1,5 @@
 package repository;
 
-import competition.Participation;
 import competition.ParticipationDTO;
 import competition.network.utils.JdbcUtils;
 import org.apache.logging.log4j.LogManager;
@@ -10,14 +9,13 @@ import java.sql.*;
 import java.util.Properties;
 
 
-public class ParticipationDbRepository implements ParticipationRepository{
+public class ParticipationDbRepository implements ParticipationRepository {
 
+    private static final Logger logger = LogManager.getLogger();
     private JdbcUtils dbUtils;
 
-    private static final Logger logger= LogManager.getLogger();
 
-
-    public ParticipationDbRepository(Properties properties){
+    public ParticipationDbRepository(Properties properties) {
         logger.info("Initializing ParticipationDbRepository with properties {}", properties);
         dbUtils = new JdbcUtils(properties);
     }
@@ -27,13 +25,13 @@ public class ParticipationDbRepository implements ParticipationRepository{
         logger.traceEntry("Saving participation {}", entity);
 
         Connection con = dbUtils.getConnection();
-        try(PreparedStatement preparedStatement = con.prepareStatement("insert into \"Participation\"(\"participantId\",\"trialId\",\"dateOfSubmission\",\"registryId\") values (?,?,?,?) returning *")){
+        try (PreparedStatement preparedStatement = con.prepareStatement("insert into \"Participation\"(\"participantId\",\"trialId\",\"dateOfSubmission\",\"registryId\") values (?,?,?,?) returning *")) {
             preparedStatement.setLong(1, entity.getParticipantId());
             preparedStatement.setLong(2, entity.getTrialId());
             preparedStatement.setTimestamp(3, new Timestamp(entity.getDateOfSubmission().getTime()));
             preparedStatement.setLong(4, entity.getRegistryId());
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Long id = resultSet.getLong("id");
                     Long participantId = resultSet.getLong("participantId");
@@ -51,7 +49,7 @@ public class ParticipationDbRepository implements ParticipationRepository{
 
         } catch (SQLException throwable) {
             logger.error(throwable);
-            System.err.println("Error DB"+throwable);
+            System.err.println("Error DB" + throwable);
         }
         logger.traceExit();
         return null;

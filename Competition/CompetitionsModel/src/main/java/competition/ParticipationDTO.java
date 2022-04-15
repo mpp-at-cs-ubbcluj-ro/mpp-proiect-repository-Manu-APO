@@ -12,6 +12,13 @@ public class ParticipationDTO implements HasId<Long>, Serializable {
     private Date dateOfSubmission;
     private Long registryId;
 
+    public ParticipationDTO(Long participantId, Long trialId, Date dateOfSubmission, Long registryId) {
+        this.participantId = participantId;
+        this.trialId = trialId;
+        this.dateOfSubmission = dateOfSubmission;
+        this.registryId = registryId;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -20,13 +27,6 @@ public class ParticipationDTO implements HasId<Long>, Serializable {
     @Override
     public void setId(Long newId) {
         this.id = newId;
-    }
-
-    public ParticipationDTO(Long participantId, Long trialId, Date dateOfSubmission, Long registryId) {
-        this.participantId = participantId;
-        this.trialId = trialId;
-        this.dateOfSubmission = dateOfSubmission;
-        this.registryId = registryId;
     }
 
     public Long getParticipantId() {

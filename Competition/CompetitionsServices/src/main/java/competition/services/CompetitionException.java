@@ -1,10 +1,11 @@
 package competition.services;
 
-public class CompetitionException extends Exception{
+public class CompetitionException extends Exception {
 
-    public CompetitionException() { }
+    public CompetitionException() {
+    }
 
-    public CompetitionException(String message){
+    public CompetitionException(String message) {
         super(message);
     }
 

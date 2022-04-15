@@ -12,9 +12,8 @@ import java.util.Properties;
 @Component
 public class TrialDbRepository implements TrialRepository {
 
+    private static final Logger logger = LogManager.getLogger();
     private JdbcUtils dbUtils;
-
-    private static final Logger logger= LogManager.getLogger();
 
     @Autowired
     public TrialDbRepository(Properties properties) {
