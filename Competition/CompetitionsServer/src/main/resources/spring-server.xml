@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:properties id="jdbcProps" location="classpath:bd.properties"/>
+
+    <bean id="athleticTestRepoJdbc" class="repository.AthleticTestDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="participantRepoJdbc" class="repository.ParticipantDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="organizerRepoJdbc" class="repository.OrganizerDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="organizerRepoOrm" class="repository.OrganizerDBRepositoryORM"/>
+
+    <bean id="entryRepoJdbc" class="repository.EntryDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="athletismService" class="service.CompetitionService">
+        <constructor-arg ref="athleticTestRepoJdbc" />
+        <constructor-arg ref="participantRepoJdbc" />
+        <constructor-arg ref="organizerRepoOrm"/>
+        <constructor-arg ref="entryRepoJdbc"/>
+    </bean>
+
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="AthleticService"/>
+        <property name="service" ref="athletismService"/>
+        <property name="serviceInterface" value="athletics.services.IAthleticsServices"/>
+        <property name="servicePort" value="1099"/>
+    </bean>
+
+</beans>

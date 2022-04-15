@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<SplitPane xmlns:fx="http://javafx.com/fxml/1" dividerPositions="0.6568080357142858" maxHeight="-Infinity" maxWidth="-Infinity"
+           minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+           xmlns="http://javafx.com/javafx/18">
+    <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <children>
+                <SplitPane layoutX="103.0" layoutY="88.0" orientation="VERTICAL" prefHeight="397.3333333333333"
+                           prefWidth="457.3333333333333" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <ListView prefHeight="191.33333333333334" prefWidth="448.6666666666667"/>
+                    </items>
+                </SplitPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="141.0">
+            <children>
+                <TextField layoutX="9.0" layoutY="14.0" prefHeight="25.0" prefWidth="180.0"
+                           promptText="Search participant"/>
+                <Button layoutX="9.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0"
+                        text="Add participant"/>
+                <Button layoutX="9.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0"
+                        text="Modify participant"/>
+                <Button layoutX="9.0" layoutY="87.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0"
+                        text="Remove participant"/>
+            </children>
+        </AnchorPane>
+    </items>
+</SplitPane>

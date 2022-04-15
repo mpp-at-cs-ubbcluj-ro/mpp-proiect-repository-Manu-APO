@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab text="Visualize">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <SplitPane dividerPositions="0.7053571428571429" prefHeight="370.6666666666667" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane prefHeight="370.6666666666667" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="361.0">
                            <children>
-                              <ListView layoutX="-1.0" prefHeight="368.6666666666667" prefWidth="418.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="242.0">
-                           <children>
-                              <TextField layoutX="12.0" layoutY="14.0" promptText="Search" />
+                              <TableView fx:id="visualizeTrialsTV" prefHeight="368.6666666666667" prefWidth="597.3333333333334" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                    <TableColumn fx:id="idCL" prefWidth="43.33334481716156" text="ID" />
+                                  <TableColumn fx:id="typeCL" prefWidth="101.33334732055664" text="Type" />
+                                  <TableColumn fx:id="categoryCL" prefWidth="112.66664123535156" text="Category" />
+                                    <TableColumn fx:id="availableCL" prefWidth="66.0" text="Available" />
+                                    <TableColumn fx:id="startsCL" prefWidth="134.0" text="Starts" />
+                                    <TableColumn fx:id="endsCL" prefWidth="140.66665649414062" text="Ends" />
+                                </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
                     </items>
@@ -35,18 +39,27 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <SplitPane dividerPositions="0.7053571428571429" prefHeight="370.6666666666667" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.8141741071428572" prefHeight="370.6666666666667" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="361.0">
                            <children>
-                              <ListView layoutX="-1.0" prefHeight="368.6666666666667" prefWidth="418.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TableView fx:id="manageTrialsTV" prefHeight="368.6666666666667" prefWidth="418.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="idCL" prefWidth="41.33334481716156" text="ID" />
+                                    <TableColumn prefWidth="82.66668319702148" text="Competition" />
+                                    <TableColumn fx:id="typeCL1" prefWidth="83.9999771118164" text="Type" />
+                                    <TableColumn fx:id="categoryCL1" prefWidth="130.66661071777344" text="Category" />
+                                    <TableColumn prefWidth="58.66668701171875" text="Max" />
+                                    <TableColumn prefWidth="85.33331298828125" text="Registered" />
+                                 </columns>
+                              </TableView>
                            </children>
                         </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="242.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="7.0">
                            <children>
-                              <Button layoutX="12.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Add trial" />
-                              <Button layoutX="12.0" layoutY="99.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Modify trial" />
-                              <Button layoutX="12.0" layoutY="56.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Remove trial" />
+                              <Button layoutX="9.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Add trial" />
+                              <Button layoutX="9.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Modify trial" />
+                              <Button layoutX="10.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Remove trial" />
                            </children>
                         </AnchorPane>
                      </items>
