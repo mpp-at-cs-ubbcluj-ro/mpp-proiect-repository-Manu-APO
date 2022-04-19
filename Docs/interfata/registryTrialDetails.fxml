@@ -14,12 +14,12 @@
          <children>
             <SplitPane layoutX="103.0" layoutY="88.0" orientation="VERTICAL" prefHeight="397.3333333333333" prefWidth="457.3333333333333" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <items>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="trialDetailsParticipantsTv" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                        <TableColumn prefWidth="60.66665907700826" text="ID" />
-                      <TableColumn prefWidth="109.33338165283203" text="Username" />
-                      <TableColumn prefWidth="100.6666259765625" text="First name" />
-                        <TableColumn prefWidth="116.6666259765625" text="Last name" />
+                        <TableColumn fx:id="trialDetailsParticipantsIdCl" prefWidth="60.66665907700826" text="ID" />
+                      <TableColumn fx:id="trialDetailsParticipantsUsernameCl" prefWidth="109.33338165283203" text="Username" />
+                      <TableColumn fx:id="trialDetailsParticipantsFirstNameCl" prefWidth="100.6666259765625" text="First name" />
+                        <TableColumn fx:id="trialDetailsParticipantsLastNameCl" prefWidth="116.6666259765625" text="Last name" />
                     </columns>
                   </TableView>
                </items>
@@ -27,24 +27,24 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="141.0">
          <children>
-            <TextField layoutX="9.0" layoutY="14.0" prefHeight="25.0" prefWidth="180.0" promptText="Search username" />
-            <Button layoutX="9.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Add participant" />
-            <Button layoutX="9.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Modify participant" />
-            <Button layoutX="9.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Remove participant" />
+            <TextField fx:id="trialDetailsUsernameTf" layoutX="9.0" layoutY="14.0" prefHeight="25.0" prefWidth="180.0" promptText="Search username" />
+            <Button fx:id="trialDetailsParticipantsAddBt" layoutX="9.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Add participant" />
+            <Button fx:id="trialDetailsParticipantsModifyBt" layoutX="9.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Modify participant" />
+            <Button fx:id="trialDetailsParticipantsRemoveBt" layoutX="9.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Remove participant" />
             <Label layoutX="14.0" layoutY="174.0" text="ID:" />
-            <Label layoutX="94.0" layoutY="174.0" text="idhoder" />
+            <Label fx:id="trialDetailsIdLb" layoutX="94.0" layoutY="174.0" text="idhoder" />
             <Label layoutX="14.0" layoutY="199.0" text="Trial type:" />
-            <Label layoutX="94.0" layoutY="199.0" text="trialtypeholder" />
+            <Label fx:id="trialDetailsTypeLb" layoutX="94.0" layoutY="199.0" text="trialtypeholder" />
             <Label layoutX="14.0" layoutY="229.0" text="Age category:" />
-            <Label layoutX="94.0" layoutY="229.0" text="agecategoryholder" />
+            <Label fx:id="trialDetailsCategoryLb" layoutX="94.0" layoutY="229.0" text="agecategoryholder" />
             <Label layoutX="15.0" layoutY="261.0" text="Max:" />
-            <Label layoutX="94.0" layoutY="261.0" text="maxholder" />
+            <Label fx:id="trialDetailsMaxLb" layoutX="94.0" layoutY="261.0" text="maxholder" />
             <Label layoutX="14.0" layoutY="292.0" text="Starts:" />
-            <Label layoutX="94.0" layoutY="292.0" text="startsholder" />
+            <Label fx:id="trialDetailsStartsLb" layoutX="94.0" layoutY="292.0" text="startsholder" />
             <Label layoutX="14.0" layoutY="324.0" text="Ends:" />
-            <Label layoutX="94.0" layoutY="324.0" text="endsholder" />
+            <Label fx:id="trialDetailsEndsLb" layoutX="94.0" layoutY="324.0" text="endsholder" />
             <Label layoutX="15.0" layoutY="357.0" text="Registered:" />
-            <Label layoutX="94.0" layoutY="357.0" text="registeredholder" />
+            <Label fx:id="trialDetailsRegisteredLb" layoutX="94.0" layoutY="357.0" text="registeredholder" />
          </children></AnchorPane>
   </items>
 </SplitPane>
