@@ -1,5 +1,7 @@
 package competition.network.rpcprotocol;
 
+import competition.Participant;
+import competition.Registry;
 import competition.SystemUser;
 import competition.services.CompetitionException;
 import competition.services.ICompetitionObserver;
@@ -122,11 +124,24 @@ public class CompetitionClientRpcReflectionWorker implements Runnable, ICompetit
         }
     }
 
-    private Response handleLOGOUT(Request request) {
-        System.out.println("Logout worker...");
-        SystemUser systemUser = (SystemUser) request.data();
+    private Response handleLOGOUT_REGISTRY(Request request) {
+        System.out.println("Logout registry worker...");
+        Registry registry = (Registry) request.data();
         try {
-            server.logout(systemUser, this);
+            server.logoutRegistry(registry, this);
+            connected = false;
+            return okResponse;
+
+        } catch (CompetitionException e) {
+            return new Response.Builder().type(ResponseType.ERROR).data(e.getMessage()).build();
+        }
+    }
+
+    private Response handleLOGOUT_PARTICIPANT(Request request) {
+        System.out.println("Logout participant worker...");
+        Participant participant = (Participant) request.data();
+        try {
+            server.logoutParticipant(participant, this);
             connected = false;
             return okResponse;
 

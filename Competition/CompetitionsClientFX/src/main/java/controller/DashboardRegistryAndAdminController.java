@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -30,7 +31,7 @@ public class DashboardRegistryAndAdminController extends UnicastRemoteObject imp
     Stage loginStage;
 
     @FXML
-    ListView<TrialDTO> listViewTrialsDTO;
+    TableView<TrialDTO> dashboardRegistryVisualizeTrialsTv;
 
     public DashboardRegistryAndAdminController() throws RemoteException {
     }
@@ -38,7 +39,8 @@ public class DashboardRegistryAndAdminController extends UnicastRemoteObject imp
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        listViewTrialsDTO.setItems(modelTrialDTO);
+
+        //listViewTrialsDTO.setItems(modelTrialDTO);
     }
 
 

@@ -24,12 +24,14 @@ public class LoginController extends UnicastRemoteObject implements Serializable
     Stage loginStage;
     DashboardRegistryAndAdminController dashboardRegistryAndAdminController;
     Parent rootPrincipalWindow;
+
     @FXML
-    Button loginBT;
+    PasswordField loginPasswordTf;
     @FXML
-    PasswordField passwordTF;
+    TextField loginUsernameTf;
     @FXML
-    TextField usernameTF;
+    Button loginSubmitBt;
+
     private ICompetitionServices competitionServices; //asta e un proxy
 
     public LoginController() throws RemoteException {
@@ -42,8 +44,8 @@ public class LoginController extends UnicastRemoteObject implements Serializable
 
     public void loginUser(MouseEvent mouseEvent) throws CompetitionException {
 
-        String username = usernameTF.getText();
-        String password = passwordTF.getText();
+        String username = loginUsernameTf.getText();
+        String password = loginPasswordTf.getText();
 
         SystemUser systemUser = new SystemUser();
         systemUser.setUsername(username);
@@ -71,11 +73,11 @@ public class LoginController extends UnicastRemoteObject implements Serializable
         dashboardRegistryAndAdminStage.show();
         loginStage.hide();
         dashboardRegistryAndAdminStage.setOnCloseRequest(event -> {
-//            dashboardRegistryAndAdminController.logOut();
+//            dashboardRegistryAndAdminController.lo();
             System.exit(0);
         });
-        usernameTF.clear();
-        passwordTF.clear();
+        loginUsernameTf.clear();
+        loginPasswordTf.clear();
 
 
     }

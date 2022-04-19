@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:properties id="jdbcProps" location="classpath:bd.properties"/>
+
+    <bean id="trialRepoJdbc" class="repository.TrialDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="participantRepoJdbc" class="repository.ParticipantDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="registryRepoJdbc" class="repository.RegistryDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <!--    <bean id="organizerRepoOrm" class="repository.OrganizerDBRepositoryORM"/>-->
+
+    <bean id="participationRepoJdbc" class="repository.ParticipationDbRepository">
+        <constructor-arg ref="jdbcProps"/>
+    </bean>
+
+    <bean id="competitionService" class="service.CompetitionService">
+        <constructor-arg ref="trialRepoJdbc"/>
+        <constructor-arg ref="participantRepoJdbc"/>
+        <constructor-arg ref="registryRepoJdbc"/>
+        <constructor-arg ref="participationRepoJdbc"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="CompetitionService"/>
+        <property name="service" ref="competitionService"/>
+        <property name="serviceInterface" value="competition.services.ICompetitionServices"/>
+        <property name="servicePort" value="1099"/>
+    </bean>
+
+</beans>

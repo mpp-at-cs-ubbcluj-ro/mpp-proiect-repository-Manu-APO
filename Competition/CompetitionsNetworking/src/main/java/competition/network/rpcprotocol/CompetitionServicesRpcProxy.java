@@ -1,5 +1,7 @@
 package competition.network.rpcprotocol;
 
+import competition.Participant;
+import competition.Registry;
 import competition.SystemUser;
 import competition.TrialDTO;
 import competition.services.CompetitionException;
@@ -83,8 +85,8 @@ public class CompetitionServicesRpcProxy implements ICompetitionServices {
     }
 
     @Override
-    public void logout(SystemUser organizer, ICompetitionObserver client) throws CompetitionException {
-        Request request = new Request.Builder().type(RequestType.LOGOUT).data(organizer).build();
+    public void logoutParticipant(Participant participant, ICompetitionObserver client) throws CompetitionException {
+        Request request = new Request.Builder().type(RequestType.LOGOUT_PARTICIPANT).data(participant).build();
         sendRequest(request);
         Response response = readResponse();
         closeConnection();
@@ -93,6 +95,19 @@ public class CompetitionServicesRpcProxy implements ICompetitionServices {
             throw new CompetitionException(err);
         }
     }
+
+    @Override
+    public void logoutRegistry(Registry registry, ICompetitionObserver client) throws CompetitionException {
+        Request request = new Request.Builder().type(RequestType.LOGOUT_REGISTRY).data(registry).build();
+        sendRequest(request);
+        Response response = readResponse();
+        closeConnection();
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new CompetitionException(err);
+        }
+    }
+
 
     private void closeConnection() {
         finished = true;

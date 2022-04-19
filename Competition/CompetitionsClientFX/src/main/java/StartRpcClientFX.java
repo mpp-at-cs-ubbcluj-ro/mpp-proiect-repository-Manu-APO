@@ -41,7 +41,7 @@ public class StartRpcClientFX extends Application {
 
 
             FXMLLoader loader1 = new FXMLLoader();
-            loader1.setLocation(getClass().getResource("/views/loginWindow.fxml"));
+            loader1.setLocation(getClass().getResource("views/dashboardRegistryAndAdmin.fxml"));
             AnchorPane root1 = loader1.load();
             DashboardRegistryAndAdminController ctrl1 = loader1.getController();
 
