@@ -1,9 +1,6 @@
 package repository;
 
-import competition.AGE_CATEGORY;
-import competition.Participant;
-import competition.TRIAL_TYPE;
-import competition.TrialDTO;
+import competition.*;
 import competition.network.utils.JdbcUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +26,33 @@ public class TrialDbRepository implements TrialRepository {
 
     @Override
     public TrialDTO findOne(Long id) {
+        logger.traceEntry("Find trial with id {}", id);
+
+        Connection conn = dbUtils.getConnection();
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement("select * from \"Trial\" where \"id\"=?")) {
+            preparedStatement.setLong(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    Long competitionId = resultSet.getLong("competitionId");
+                    TRIAL_TYPE trialType = TRIAL_TYPE.valueOf(resultSet.getString("trialType"));
+                    AGE_CATEGORY ageCategory = AGE_CATEGORY.valueOf(resultSet.getString("ageCategory"));
+                    int maxNumberOfParticipants = resultSet.getInt("maxNumberOfParticipants");
+                    Date startDate = resultSet.getDate("startDate");
+                    Date endDate = resultSet.getDate("endDate");
+
+                    TrialDTO foundTrial = new TrialDTO(competitionId,maxNumberOfParticipants,trialType,ageCategory,startDate,endDate);
+                    foundTrial.setId(id);
+                    logger.trace("Trial found {}", foundTrial);
+                    return foundTrial;
+                }
+                logger.trace("Trial with id {} not found", id);
+            }
+        } catch (SQLException throwable) {
+            logger.error(throwable);
+            System.err.println("Error DB: " + throwable);
+        }
+        logger.traceExit("Exiting finding trial with id {}", id);
         return null;
     }
 

@@ -1,11 +1,16 @@
 package repository;
 
+import competition.AGE_CATEGORY;
 import competition.ParticipationDTO;
+import competition.TRIAL_TYPE;
+import competition.TrialDTO;
 import competition.network.utils.JdbcUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -57,7 +62,32 @@ public class ParticipationDbRepository implements ParticipationRepository {
 
     @Override
     public Iterable<ParticipationDTO> findAll() {
-        return null;
+        logger.traceEntry("Finding all participation");
+
+        Connection conn = dbUtils.getConnection();
+        List<ParticipationDTO> participation = new ArrayList<>();
+        try (PreparedStatement preparedStatement = conn.prepareStatement("select * from \"Participation\"")) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Long id = resultSet.getLong("id");
+                    Long participantId = resultSet.getLong("participantId");
+                    Long trialId = resultSet.getLong("trialId");
+                    Date dateOfSubmission = resultSet.getDate("dateOfSubmission");
+                    Long registryId = resultSet.getLong("registryId");
+
+                    ParticipationDTO part = new ParticipationDTO(participantId,trialId,dateOfSubmission,registryId);
+                    part.setId(id);
+                    participation.add(part);
+                }
+            }
+        } catch (SQLException throwable) {
+            logger.error(throwable);
+            System.err.println("Error DB: " + throwable);
+        }
+
+        logger.traceExit("Exiting finding all participation {}", participation);
+        return participation;
+
     }
 
     @Override

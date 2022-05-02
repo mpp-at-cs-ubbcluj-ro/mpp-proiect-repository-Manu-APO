@@ -27,7 +27,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="loginSubmitBt" mnemonicParsing="false" prefHeight="25.0" prefWidth="208.0" text="LOGIN" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="loginSubmitBt" mnemonicParsing="false" onMouseClicked="#loginUser" prefHeight="25.0" prefWidth="208.0" text="LOGIN" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="loginTitleLb" alignment="CENTER" contentDisplay="TOP" prefHeight="30.0" prefWidth="200.0" text="Competition App" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="20.0" />

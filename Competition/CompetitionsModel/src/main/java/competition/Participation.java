@@ -1,5 +1,6 @@
 package competition;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -59,6 +60,21 @@ public class Participation implements HasId<Long>, Serializable {
 
     public void setRegistry(Registry registry) {
         this.registry = registry;
+    }
+
+    @Transient
+    public TRIAL_TYPE getTrialType(){
+        return trial.getTrialType();
+    }
+
+    @Transient
+    public Date getStartDate(){
+        return trial.getStartDate();
+    }
+
+    @Transient
+    public Date getEndDate(){
+        return trial.getEndDate();
     }
 
     @Override

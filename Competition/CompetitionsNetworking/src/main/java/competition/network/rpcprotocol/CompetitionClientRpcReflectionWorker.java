@@ -106,7 +106,7 @@ public class CompetitionClientRpcReflectionWorker implements Runnable, ICompetit
         SystemUser systemUser = (SystemUser) request.data();
         System.out.println("systemUser in handle login" + systemUser);
         try {
-            server.login(systemUser, this);
+            server.loginParticipant(systemUser, this);
 
             return okResponse;
         } catch (CompetitionException e) {

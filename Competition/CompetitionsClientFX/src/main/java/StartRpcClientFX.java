@@ -1,4 +1,5 @@
 import competition.services.ICompetitionServices;
+import controller.DashboardParticipantController;
 import controller.DashboardRegistryAndAdminController;
 import controller.LoginController;
 import javafx.application.Application;
@@ -13,44 +14,43 @@ import java.io.IOException;
 
 public class StartRpcClientFX extends Application {
 
-    private static int defaultPort = 55555;
-    private static String defaultServer = "localhost";
-
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println("In start in StartRpcClientFX");
+        System.out.println("In start StartRpcClientFX");
 
         ApplicationContext factory = new ClassPathXmlApplicationContext("classpath:spring-client.xml");
         ICompetitionServices services = (ICompetitionServices) factory.getBean("competitionServices"); //aici iau toate serviciile de la server pentru client
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/views/loginWindow.fxml"));
+            FXMLLoader loginLoader = new FXMLLoader();
+            loginLoader.setLocation(getClass().getResource("/views/loginWindow.fxml"));
+            AnchorPane loginRoot = loginLoader.load();
+            LoginController loginController = loginLoader.getController();
+            loginController.setService(services, primaryStage);
+            Scene scene = new Scene(loginRoot);
 
-            AnchorPane root = loader.load();
-            LoginController ctrl = loader.getController();
-            ctrl.setService(services, primaryStage);
-            Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-
             primaryStage.setTitle("Competition app");
 
 
-            FXMLLoader loader1 = new FXMLLoader();
-            loader1.setLocation(getClass().getResource("views/dashboardRegistryAndAdmin.fxml"));
-            AnchorPane root1 = loader1.load();
-            DashboardRegistryAndAdminController ctrl1 = loader1.getController();
+            FXMLLoader dashboardRegistryLoader = new FXMLLoader();
+            dashboardRegistryLoader.setLocation(getClass().getResource("views/dashboardRegistryAndAdmin.fxml"));
+            AnchorPane dashboardRegistryRoot = dashboardRegistryLoader.load();
+            DashboardRegistryAndAdminController dashboardRegistryController = dashboardRegistryLoader.getController();
+            loginController.setRegistryController(dashboardRegistryController);
+            loginController.setRegistryParent(dashboardRegistryRoot);
 
-            ctrl.setCompetitionController(ctrl1);
-            ctrl.setParent(root1);
-
+            FXMLLoader dashboardParticipantLoader = new FXMLLoader();
+            dashboardParticipantLoader.setLocation(getClass().getResource("views/dashboardParticipant.fxml"));
+            AnchorPane dashboardParticipantRoot = dashboardParticipantLoader.load();
+            DashboardParticipantController dashboardParticipantController = dashboardParticipantLoader.getController();
+            loginController.setParticipantController(dashboardParticipantController);
+            loginController.setParticipantParent(dashboardParticipantRoot);
 
             primaryStage.show();
-
 
         } catch (IOException e) {
             e.printStackTrace();

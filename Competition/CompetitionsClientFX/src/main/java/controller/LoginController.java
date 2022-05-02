@@ -1,5 +1,7 @@
 package controller;
 
+import competition.Participant;
+import competition.Registry;
 import competition.SystemUser;
 import competition.services.CompetitionException;
 import competition.services.ICompetitionServices;
@@ -21,9 +23,13 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class LoginController extends UnicastRemoteObject implements Serializable {
 
+    private ICompetitionServices competitionServices; //asta e un proxy
+
     Stage loginStage;
     DashboardRegistryAndAdminController dashboardRegistryAndAdminController;
-    Parent rootPrincipalWindow;
+    DashboardParticipantController dashboardParticipantController;
+    Parent rootRegistryWindow;
+    Parent rootParticipantWindow;
 
     @FXML
     PasswordField loginPasswordTf;
@@ -31,8 +37,6 @@ public class LoginController extends UnicastRemoteObject implements Serializable
     TextField loginUsernameTf;
     @FXML
     Button loginSubmitBt;
-
-    private ICompetitionServices competitionServices; //asta e un proxy
 
     public LoginController() throws RemoteException {
     }
@@ -52,8 +56,14 @@ public class LoginController extends UnicastRemoteObject implements Serializable
         systemUser.setPassword(password);
 
         try {
-            competitionServices.login(systemUser, dashboardRegistryAndAdminController); //proxy.login()
-            openPrincipalWindow(systemUser);
+            Registry registry = competitionServices.loginRegistry(systemUser, dashboardRegistryAndAdminController); //proxy.login()
+            if(registry != null) {
+                openRegistryWindow(registry);
+            }
+            else{
+                Participant participant = competitionServices.loginParticipant(systemUser, dashboardParticipantController);
+                openParticipantWindow(participant);
+            }
         } catch (CompetitionException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Wrong username or password");
             alert.show();
@@ -62,32 +72,54 @@ public class LoginController extends UnicastRemoteObject implements Serializable
 
     }
 
-    private void openPrincipalWindow(SystemUser systemUser) {
-
+    private void openRegistryWindow(Registry registry) {
         Stage dashboardRegistryAndAdminStage = new Stage();
-        Scene scene = new Scene(rootPrincipalWindow);
+        Scene scene = new Scene(rootRegistryWindow);
         dashboardRegistryAndAdminStage.setScene(scene);
 
-        dashboardRegistryAndAdminStage.setTitle("@" + systemUser.getUsername());
-        dashboardRegistryAndAdminController.setAtrributes(competitionServices, systemUser, dashboardRegistryAndAdminStage, loginStage);
+        dashboardRegistryAndAdminStage.setTitle("Dashboard");
+        dashboardRegistryAndAdminController.setAtrributes(competitionServices, registry, dashboardRegistryAndAdminStage, loginStage);
         dashboardRegistryAndAdminStage.show();
         loginStage.hide();
         dashboardRegistryAndAdminStage.setOnCloseRequest(event -> {
+            dashboardRegistryAndAdminController.logOut();
+            System.exit(0);
+        });
+        loginUsernameTf.clear();
+        loginPasswordTf.clear();
+    }
+
+    private void openParticipantWindow(Participant participant) {
+        Stage dashboardParticipantStage = new Stage();
+        Scene scene = new Scene(rootParticipantWindow);
+        dashboardParticipantStage.setScene(scene);
+
+        dashboardParticipantStage.setTitle("Dashboard");
+        dashboardParticipantController.setAtrributes(competitionServices, participant, dashboardParticipantStage, loginStage);
+        dashboardParticipantStage.show();
+        loginStage.hide();
+        dashboardParticipantStage.setOnCloseRequest(event -> {
 //            dashboardRegistryAndAdminController.lo();
             System.exit(0);
         });
         loginUsernameTf.clear();
         loginPasswordTf.clear();
-
-
     }
 
-    public void setCompetitionController(DashboardRegistryAndAdminController ctrl1) {
-        dashboardRegistryAndAdminController = ctrl1;
+    public void setRegistryController(DashboardRegistryAndAdminController ctrl) {
+        dashboardRegistryAndAdminController = ctrl;
     }
 
-    public void setParent(AnchorPane root1) {
-        rootPrincipalWindow = root1;
+    public void setParticipantController(DashboardParticipantController ctrl) {
+        dashboardParticipantController = ctrl;
+    }
+
+    public void setRegistryParent(AnchorPane root) {
+        rootRegistryWindow = root;
+    }
+
+    public void setParticipantParent(AnchorPane root) {
+        rootParticipantWindow = root;
     }
 }
 

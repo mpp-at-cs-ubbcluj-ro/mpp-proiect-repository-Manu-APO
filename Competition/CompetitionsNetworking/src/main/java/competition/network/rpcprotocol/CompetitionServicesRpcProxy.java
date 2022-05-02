@@ -1,9 +1,6 @@
 package competition.network.rpcprotocol;
 
-import competition.Participant;
-import competition.Registry;
-import competition.SystemUser;
-import competition.TrialDTO;
+import competition.*;
 import competition.services.CompetitionException;
 import competition.services.ICompetitionObserver;
 import competition.services.ICompetitionServices;
@@ -39,6 +36,11 @@ public class CompetitionServicesRpcProxy implements ICompetitionServices {
     }
 
     @Override
+    public Iterable<Participation> getAllUserParticipation() throws CompetitionException {
+        return null;
+    }
+
+    @Override
     public Iterable<TrialDTO> getAllTrialsDTO() throws CompetitionException {
         Request request = new Request.Builder().type(RequestType.TRIALS_DTO).build();//creez o cerere
 
@@ -61,28 +63,37 @@ public class CompetitionServicesRpcProxy implements ICompetitionServices {
     }
 
     @Override
-    public void login(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
-        initializeConnection();
-
-        Request request = new Request.Builder().type(RequestType.LOGIN).data(systemUser).build(); //creez o cerere
-
-        sendRequest(request); //trimit cererea de la client la server (eu acuma sunt pe client)
-        System.out.println("cererea de login s-a trimis cu succes in client");
-
-        Response response = readResponse(); ///citest raspunsul
-        System.out.println("raspunsul a fost citit cu succes in client");
-
-        if (response.type() == ResponseType.OK) {
-            this.client = client; // cand e ok raspunsul aici tinem minte clientul mai exact controllerul lui (care defapt e un client)
-            return;
-        }
-        if (response.type() == ResponseType.ERROR) {
-            String err = response.data().toString();
-            closeConnection();
-            throw new CompetitionException(err);
-        }
-
+    public Registry loginRegistry(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
+        return null;
     }
+
+    @Override
+    public Participant loginParticipant(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
+        return null;
+    }
+
+//    @Override
+//    public SystemUser login(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
+//        initializeConnection();
+//
+//        Request request = new Request.Builder().type(RequestType.LOGIN).data(systemUser).build(); //creez o cerere
+//
+//        sendRequest(request); //trimit cererea de la client la server (eu acuma sunt pe client)
+//        System.out.println("cererea de login s-a trimis cu succes in client");
+//
+//        Response response = readResponse(); ///citest raspunsul
+//        System.out.println("raspunsul a fost citit cu succes in client");
+//
+//        if (response.type() == ResponseType.OK) {
+//            this.client = client; // cand e ok raspunsul aici tinem minte clientul mai exact controllerul lui (care defapt e un client)
+//        }
+//        if (response.type() == ResponseType.ERROR) {
+//            String err = response.data().toString();
+//            closeConnection();
+//            throw new CompetitionException(err);
+//        }
+//        return null;
+//    }
 
     @Override
     public void logoutParticipant(Participant participant, ICompetitionObserver client) throws CompetitionException {

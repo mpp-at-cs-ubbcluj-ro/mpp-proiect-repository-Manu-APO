@@ -1,15 +1,16 @@
 package competition.services;
 
-import competition.Participant;
-import competition.Registry;
-import competition.SystemUser;
-import competition.TrialDTO;
+import competition.*;
 
 public interface ICompetitionServices {
 
+    Iterable<Participation> getAllUserParticipation() throws CompetitionException;
+
     Iterable<TrialDTO> getAllTrialsDTO() throws CompetitionException;
 
-    void login(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException;
+    Registry loginRegistry(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException;
+
+    Participant loginParticipant(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException;
 
     void logoutParticipant(Participant participant, ICompetitionObserver client) throws CompetitionException;
 

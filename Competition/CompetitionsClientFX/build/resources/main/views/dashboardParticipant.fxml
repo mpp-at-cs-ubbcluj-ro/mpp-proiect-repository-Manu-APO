@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="340.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="340.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardParticipantController">
    <children>
       <SplitPane dividerPositions="0.0942828485456369" orientation="VERTICAL" prefHeight="340.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -25,7 +25,7 @@
                         <TableColumn fx:id="typeCL" prefWidth="102.66666030883789" text="Type" />
                         <TableColumn fx:id="startsCL" prefWidth="144.6666717529297" text="Starts" />
                         <TableColumn fx:id="endsCL" prefWidth="168.0" text="Ends" />
-                        <TableColumn prefWidth="138.66665649414062" text="Submission" />
+                        <TableColumn fx:id="submissionCL" prefWidth="138.66665649414062" text="Submission" />
                      </columns>
                   </TableView>
                </children>

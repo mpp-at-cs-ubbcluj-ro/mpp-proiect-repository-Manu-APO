@@ -1,9 +1,6 @@
 package service;
 
-import competition.Participant;
-import competition.Registry;
-import competition.SystemUser;
-import competition.TrialDTO;
+import competition.*;
 import competition.services.CompetitionException;
 import competition.services.ICompetitionObserver;
 import competition.services.ICompetitionServices;
@@ -12,6 +9,9 @@ import repository.ParticipationRepository;
 import repository.RegistryRepository;
 import repository.TrialRepository;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -36,26 +36,51 @@ public class CompetitionService implements ICompetitionServices {
     }
 
     @Override
+    public Iterable<Participation> getAllUserParticipation() throws CompetitionException {
+        List<Participation> participation = new ArrayList<>();
+        var participationDto = participationRepository.findAll();
+        for(ParticipationDTO part: participationDto){
+            var participant = participantRepository.findOne(part.getParticipantId());
+            var trial = trialRepository.findOne(part.getTrialId());
+            var registry = registryRepository.findOne(part.getRegistryId());
+            Trial mock_trial = new Trial(new Competition(new Date(1000),new Date(1000)),trial.getMaxNumberOfParticipants(),trial.getTrialType(),trial.getAgeCategory(),trial.getStartDate(),trial.getEndDate());
+            var finalPart = new Participation(participant,mock_trial,part.getDateOfSubmission(),registry);
+            finalPart.setId(part.getId());
+            participation.add(finalPart);
+        }
+        return participation;
+    }
+
+    @Override
     public Iterable<TrialDTO> getAllTrialsDTO() throws CompetitionException {
         return trialRepository.findAll();
     }
 
     @Override
-    public void login(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
+    public Registry loginRegistry(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
         Registry registerReceived = registryRepository.getRegistryByCredentials(systemUser.getUsername(), systemUser.getPassword());
-        Participant participantReceived = participantRepository.getParticipantByCredentials(systemUser.getUsername(), systemUser.getPassword());
 
         if (registerReceived != null) {
             if (loggedRegistries.get(registerReceived.getUsername()) != null) {
                 throw new CompetitionException("Registry already logged in.");
             }
             loggedRegistries.put(registerReceived.getUsername(), client);
+            return registerReceived;
 
-        } else if (participantReceived != null) {
+        }
+        return registerReceived;
+    }
+
+    @Override
+    public Participant loginParticipant(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
+        Participant participantReceived = participantRepository.getParticipantByCredentials(systemUser.getUsername(), systemUser.getPassword());
+
+        if (participantReceived != null) {
             if (loggedParticipants.get(participantReceived.getUsername()) != null) {
                 throw new CompetitionException("Participant already logged in.");
             }
             loggedParticipants.put(participantReceived.getUsername(), client);
+            return participantReceived;
         } else {
             throw new CompetitionException("Authentication failed.");
         }
