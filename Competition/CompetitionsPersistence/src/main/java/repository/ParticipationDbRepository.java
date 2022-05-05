@@ -1,9 +1,6 @@
 package repository;
 
-import competition.AGE_CATEGORY;
-import competition.ParticipationDTO;
-import competition.TRIAL_TYPE;
-import competition.TrialDTO;
+import competition.*;
 import competition.network.utils.JdbcUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -87,6 +84,35 @@ public class ParticipationDbRepository implements ParticipationRepository {
 
         logger.traceExit("Exiting finding all participation {}", participation);
         return participation;
+
+    }
+
+    public Iterable<Participant> getAllParticipantsOfTrial(Long trialId){
+        logger.traceEntry("Finding all participants of trial with id:" + trialId);
+
+        Connection conn = dbUtils.getConnection();
+        List<Participant> participants = new ArrayList<>();
+        try (PreparedStatement preparedStatement = conn.prepareStatement("select A.id,\"username\",\"firstName\",\"lastName\" from \"Participant\" A INNER JOIN \"Participation\" B on A.id=B.\"participantId\" and B.\"trialId\"=? ")) {
+            preparedStatement.setLong(1, trialId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Long id = resultSet.getLong("id");
+                    String username = resultSet.getString("username");
+                    String firstName = resultSet.getString("firstName");
+                    String lastName = resultSet.getString("lastName");
+
+                    Participant participant = new Participant(username, "", firstName, lastName);
+                    participant.setId(id);
+                    participants.add(participant);
+                }
+            }
+        } catch (SQLException throwable) {
+            logger.error(throwable);
+            System.err.println("Error DB: " + throwable);
+        }
+
+        logger.traceExit("Exiting Finding all participants of trial {}", participants);
+        return participants;
 
     }
 

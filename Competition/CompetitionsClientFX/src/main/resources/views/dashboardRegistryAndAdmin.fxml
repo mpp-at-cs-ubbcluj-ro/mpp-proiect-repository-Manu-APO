@@ -9,20 +9,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardRegistryAndAdminController">
    <children>
       <SplitPane dividerPositions="0.0794590025359256" orientation="VERTICAL" prefHeight="397.0" prefWidth="603.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="601.0">
                <children>
-                  <Button fx:id="dashboardRegistryLogoutBt" layoutX="535.0" layoutY="1.0" mnemonicParsing="false" text="Logout" />
+                  <Button fx:id="dashboardRegistryLogoutBt" layoutX="535.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#logOutAndSwitchToLogin" text="Logout" />
                   <Label fx:id="dashboardRegistryUsernameLb" layoutX="464.0" layoutY="5.0" text="\@username" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="600.6666666666666" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TabPane fx:id="dashboardRegistryTp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="600.6666666666666" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <tabs>
                       <Tab fx:id="dashboardRegistryVisualizeTb" text="Visualize">
                         <content>

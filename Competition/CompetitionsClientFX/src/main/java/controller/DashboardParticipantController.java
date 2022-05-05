@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -46,6 +48,11 @@ public class DashboardParticipantController extends UnicastRemoteObject implemen
     @FXML
     TableColumn<ObservableList<Participation>, Date> submissionCL;
 
+    @FXML
+    Button dashboardParticipantLogoutBt;
+    @FXML
+    Label dashboardParticipantUsernameLb;
+
     public DashboardParticipantController() throws RemoteException {
     }
 
@@ -71,6 +78,8 @@ public class DashboardParticipantController extends UnicastRemoteObject implemen
     }
 
     private void initModel() {
+        dashboardParticipantUsernameLb.setText("@"+participant.getUsername());
+
         Iterable<Participation> list = null;
         try {
             list = competitionServices.getAllUserParticipation();
@@ -78,7 +87,6 @@ public class DashboardParticipantController extends UnicastRemoteObject implemen
             e.printStackTrace();
         }
         modelParticipation.setAll((Collection<? extends Participation>) list);
-        // initModelParticipantDTO();
     }
 
     @Override
@@ -94,12 +102,21 @@ public class DashboardParticipantController extends UnicastRemoteObject implemen
         });
     }
 
-    public void logOut() {
+    public void logOutAndSwitchToLogin() {
         try{
-            competitionServices.logoutParticipant((Participant) participant,this);
+            competitionServices.logoutParticipant(participant,this);
         } catch (Exception e) {
             System.err.println("Logout error "+e);
         }
-        //principalStage.hide();
+        dashboardParticipantStage.hide();
+        loginStage.show();
+    }
+
+    public void logOut(){
+        try{
+            competitionServices.logoutParticipant(participant,this);
+        } catch (Exception e) {
+            System.err.println("Logout error "+e);
+        }
     }
 }

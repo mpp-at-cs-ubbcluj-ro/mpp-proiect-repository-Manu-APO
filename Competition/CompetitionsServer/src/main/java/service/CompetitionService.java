@@ -36,7 +36,7 @@ public class CompetitionService implements ICompetitionServices {
     }
 
     @Override
-    public Iterable<Participation> getAllUserParticipation() throws CompetitionException {
+    public synchronized Iterable<Participation> getAllUserParticipation() throws CompetitionException {
         List<Participation> participation = new ArrayList<>();
         var participationDto = participationRepository.findAll();
         for(ParticipationDTO part: participationDto){
@@ -52,12 +52,12 @@ public class CompetitionService implements ICompetitionServices {
     }
 
     @Override
-    public Iterable<TrialDTO> getAllTrialsDTO() throws CompetitionException {
+    public synchronized Iterable<TrialDTO> getAllTrialsDTO() throws CompetitionException {
         return trialRepository.findAll();
     }
 
     @Override
-    public Registry loginRegistry(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
+    public synchronized Registry loginRegistry(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
         Registry registerReceived = registryRepository.getRegistryByCredentials(systemUser.getUsername(), systemUser.getPassword());
 
         if (registerReceived != null) {
@@ -72,7 +72,7 @@ public class CompetitionService implements ICompetitionServices {
     }
 
     @Override
-    public Participant loginParticipant(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
+    public synchronized Participant loginParticipant(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
         Participant participantReceived = participantRepository.getParticipantByCredentials(systemUser.getUsername(), systemUser.getPassword());
 
         if (participantReceived != null) {
@@ -97,11 +97,15 @@ public class CompetitionService implements ICompetitionServices {
 
     @Override
     public void logoutParticipant(Participant participant, ICompetitionObserver client) throws CompetitionException {
-        ICompetitionObserver participants = loggedRegistries.remove(participant.getUsername());
+        ICompetitionObserver participants = loggedParticipants.remove(participant.getUsername());
 
         if(participants == null){
             throw new CompetitionException("Participant "+ participant.getUsername()+" is not logged in");
         }
+    }
+
+    public synchronized Iterable<Participant> getAllParticipantsOfTrial(Long trialId){
+        return participationRepository.getAllParticipantsOfTrial(trialId);
     }
 
 //    public synchronized Iterable<Participant> findAllParticipantsByTestLegthAndAge(int testLength, int minAge, int maxAge){

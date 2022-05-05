@@ -63,6 +63,11 @@ public class CompetitionServicesRpcProxy implements ICompetitionServices {
     }
 
     @Override
+    public Iterable<Participant> getAllParticipantsOfTrial(Long trialId) throws CompetitionException {
+        return null;
+    }
+
+    @Override
     public Registry loginRegistry(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
         return null;
     }

@@ -215,4 +215,6 @@ public class ParticipantDbRepository implements ParticipantRepository {
         logger.traceExit("Exiting finding participant by credentials");
         return null;
     }
+
+
 }

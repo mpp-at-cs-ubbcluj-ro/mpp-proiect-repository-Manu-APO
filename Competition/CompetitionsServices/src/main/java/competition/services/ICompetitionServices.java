@@ -7,6 +7,7 @@ public interface ICompetitionServices {
     Iterable<Participation> getAllUserParticipation() throws CompetitionException;
 
     Iterable<TrialDTO> getAllTrialsDTO() throws CompetitionException;
+    Iterable<Participant> getAllParticipantsOfTrial(Long trialId) throws CompetitionException;
 
     Registry loginRegistry(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException;
 

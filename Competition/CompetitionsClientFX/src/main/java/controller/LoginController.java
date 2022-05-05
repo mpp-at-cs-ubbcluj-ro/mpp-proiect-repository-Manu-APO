@@ -6,6 +6,7 @@ import competition.SystemUser;
 import competition.services.CompetitionException;
 import competition.services.ICompetitionServices;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,15 +18,22 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ResourceBundle;
 
 
-public class LoginController extends UnicastRemoteObject implements Serializable {
+public class LoginController extends UnicastRemoteObject implements Serializable, Initializable {
 
     private ICompetitionServices competitionServices; //asta e un proxy
 
     Stage loginStage;
+
+    Stage dashboardRegistryAndAdminStage;
+    Stage dashboardParticipantStage;
+
+
     DashboardRegistryAndAdminController dashboardRegistryAndAdminController;
     DashboardParticipantController dashboardParticipantController;
     Parent rootRegistryWindow;
@@ -39,6 +47,23 @@ public class LoginController extends UnicastRemoteObject implements Serializable
     Button loginSubmitBt;
 
     public LoginController() throws RemoteException {
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        dashboardRegistryAndAdminStage = new Stage();
+        dashboardRegistryAndAdminStage.setTitle("Dashboard");
+        dashboardRegistryAndAdminStage.setOnCloseRequest(event -> {
+            dashboardRegistryAndAdminController.logOut();
+            System.exit(0);
+        });
+
+        dashboardParticipantStage = new Stage();
+        dashboardParticipantStage.setTitle("Dashboard");
+        dashboardParticipantStage.setOnCloseRequest(event -> {
+            dashboardParticipantController.logOut();
+            System.exit(0);
+        });
     }
 
     public void setService(ICompetitionServices services, Stage primaryStage) {
@@ -73,35 +98,17 @@ public class LoginController extends UnicastRemoteObject implements Serializable
     }
 
     private void openRegistryWindow(Registry registry) {
-        Stage dashboardRegistryAndAdminStage = new Stage();
-        Scene scene = new Scene(rootRegistryWindow);
-        dashboardRegistryAndAdminStage.setScene(scene);
-
-        dashboardRegistryAndAdminStage.setTitle("Dashboard");
         dashboardRegistryAndAdminController.setAtrributes(competitionServices, registry, dashboardRegistryAndAdminStage, loginStage);
         dashboardRegistryAndAdminStage.show();
         loginStage.hide();
-        dashboardRegistryAndAdminStage.setOnCloseRequest(event -> {
-            dashboardRegistryAndAdminController.logOut();
-            System.exit(0);
-        });
         loginUsernameTf.clear();
         loginPasswordTf.clear();
     }
 
     private void openParticipantWindow(Participant participant) {
-        Stage dashboardParticipantStage = new Stage();
-        Scene scene = new Scene(rootParticipantWindow);
-        dashboardParticipantStage.setScene(scene);
-
-        dashboardParticipantStage.setTitle("Dashboard");
         dashboardParticipantController.setAtrributes(competitionServices, participant, dashboardParticipantStage, loginStage);
         dashboardParticipantStage.show();
         loginStage.hide();
-        dashboardParticipantStage.setOnCloseRequest(event -> {
-//            dashboardRegistryAndAdminController.lo();
-            System.exit(0);
-        });
         loginUsernameTf.clear();
         loginPasswordTf.clear();
     }
@@ -116,10 +123,14 @@ public class LoginController extends UnicastRemoteObject implements Serializable
 
     public void setRegistryParent(AnchorPane root) {
         rootRegistryWindow = root;
+        Scene scene = new Scene(rootRegistryWindow);
+        dashboardRegistryAndAdminStage.setScene(scene);
     }
 
     public void setParticipantParent(AnchorPane root) {
         rootParticipantWindow = root;
+        Scene scene = new Scene(rootParticipantWindow);
+        dashboardParticipantStage.setScene(scene);
     }
 }
 
