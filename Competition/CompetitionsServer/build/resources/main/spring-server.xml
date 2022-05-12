@@ -17,7 +17,7 @@
         <constructor-arg ref="jdbcProps"/>
     </bean>
 
-    <!--    <bean id="organizerRepoOrm" class="repository.OrganizerDBRepositoryORM"/>-->
+    <bean id="participantRepoOrm" class="repository.ParticipantDbRepositoryORM"/>
 
     <bean id="participationRepoJdbc" class="repository.ParticipationDbRepository">
         <constructor-arg ref="jdbcProps"/>
@@ -25,7 +25,8 @@
 
     <bean id="competitionService" class="service.CompetitionService">
         <constructor-arg ref="trialRepoJdbc"/>
-        <constructor-arg ref="participantRepoJdbc"/>
+<!--        <constructor-arg ref="participantRepoJdbc"/>-->
+        <constructor-arg ref="participantRepoOrm"/>
         <constructor-arg ref="registryRepoJdbc"/>
         <constructor-arg ref="participationRepoJdbc"/>
     </bean>

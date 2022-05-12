@@ -13,8 +13,8 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button layoutX="535.0" layoutY="1.0" mnemonicParsing="false" text="Log out" />
-                  <Label layoutX="451.0" layoutY="5.0" text="\@username" />
+                  <Button fx:id="dashboardParticipantLogoutBt" layoutX="535.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#logOutAndSwitchToLogin" text="Log out" />
+                  <Label fx:id="dashboardParticipantUsernameLb" layoutX="451.0" layoutY="5.0" text="\@username" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

@@ -15,9 +15,20 @@ public class TrialDTO implements HasId<Long>, Serializable {
     private Date startDate;
     private Date endDate;
 
+    public TrialDTO() {
+
+    }
 
     public TrialDTO(Long parentCompetitionId, int maxNumberOfParticipants, TRIAL_TYPE trialType, AGE_CATEGORY ageCategory, Date startDate, Date endDate) {
         this.parentCompetitionId = parentCompetitionId;
+        this.maxNumberOfParticipants = maxNumberOfParticipants;
+        this.trialType = trialType;
+        this.ageCategory = ageCategory;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public TrialDTO(int maxNumberOfParticipants, TRIAL_TYPE trialType, AGE_CATEGORY ageCategory, Date startDate, Date endDate) {
         this.maxNumberOfParticipants = maxNumberOfParticipants;
         this.trialType = trialType;
         this.ageCategory = ageCategory;

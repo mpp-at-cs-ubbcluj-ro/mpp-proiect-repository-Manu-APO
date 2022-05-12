@@ -1,6 +1,7 @@
 package repository;
 
 import competition.Participant;
+import org.apache.logging.log4j.core.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -45,7 +46,7 @@ public class ParticipantDbRepositoryORM implements ParticipantRepository {
             try{
                 transaction = session.beginTransaction();
 
-                Query qq = session.createQuery("From Participant where username = ?1 and password = ?2",Participant.class);
+                Query qq = session.createQuery("From Participant where username=?1 and password=?2",Participant.class);
 
                 qq.setParameter(1,username).setParameter(2,password);
                 System.out.println(qq);
