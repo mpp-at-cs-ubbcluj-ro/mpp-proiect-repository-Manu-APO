@@ -7,14 +7,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="340.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="340.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardParticipantController">
    <children>
       <SplitPane dividerPositions="0.0942828485456369" orientation="VERTICAL" prefHeight="340.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button layoutX="535.0" layoutY="1.0" mnemonicParsing="false" text="Log out" />
-                  <Label layoutX="451.0" layoutY="5.0" text="\@username" />
+                  <Button fx:id="dashboardParticipantLogoutBt" layoutX="535.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#logOutAndSwitchToLogin" text="Log out" />
+                  <Label fx:id="dashboardParticipantUsernameLb" layoutX="451.0" layoutY="5.0" text="\@username" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
