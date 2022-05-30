@@ -1,8 +1,5 @@
 import competition.services.ICompetitionServices;
-import controller.DashboardParticipantController;
-import controller.DashboardRegistryAndAdminController;
-import controller.LoginController;
-import controller.RegistryTrialsDetailsController;
+import controller.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -60,6 +57,13 @@ public class StartRpcClientFX extends Application {
             RegistryTrialsDetailsController registryTrialsDetailsController = registryTrialsDetailsLoader.getController();
             dashboardRegistryController.setDetailsController(registryTrialsDetailsController);
             dashboardRegistryController.setDetailsParent(registryTrialsDetailsRoot);
+
+            FXMLLoader addUpdateParticipantLoader = new FXMLLoader();
+            addUpdateParticipantLoader.setLocation(getClass().getResource("views/addUpdateParticipant.fxml"));
+            AnchorPane addUpdateParticipantRoot = addUpdateParticipantLoader.load();
+            AddUpdateParticipantController addUpdateParticipantController = addUpdateParticipantLoader.getController();
+            registryTrialsDetailsController.setAddUpdateParticipantController(addUpdateParticipantController);
+            registryTrialsDetailsController.setAddUpdateParticipantParent(addUpdateParticipantRoot);
 
             primaryStage.show();
 

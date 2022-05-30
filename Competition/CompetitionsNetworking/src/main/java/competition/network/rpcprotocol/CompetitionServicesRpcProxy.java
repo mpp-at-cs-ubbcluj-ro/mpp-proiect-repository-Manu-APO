@@ -76,6 +76,15 @@ public class CompetitionServicesRpcProxy implements ICompetitionServices {
     public Participant loginParticipant(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {
         return null;
     }
+    public synchronized void addParticipantForTrial(TrialDTO trial,Participant participant){
+
+    }
+    public synchronized void removeParticipantFromTrial(TrialDTO trial,Participant participant){
+
+    }
+    public synchronized void modifyParticipantFromTrial(TrialDTO trial,Participant participant){
+
+    }
 
 //    @Override
 //    public SystemUser login(SystemUser systemUser, ICompetitionObserver client) throws CompetitionException {

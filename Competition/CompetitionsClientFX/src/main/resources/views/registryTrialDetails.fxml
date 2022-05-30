@@ -8,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistryTrialsDetailsController">
    <children>
       <SplitPane dividerPositions="0.6568080357142858" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -32,9 +31,9 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="141.0">
                <children>
                   <TextField fx:id="trialDetailsUsernameTf" layoutX="9.0" layoutY="14.0" prefHeight="25.0" prefWidth="180.0" promptText="Search username" />
-                  <Button fx:id="trialDetailsParticipantsAddBt" layoutX="9.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Add participant" />
-                  <Button fx:id="trialDetailsParticipantsModifyBt" layoutX="9.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Modify participant" />
-                  <Button fx:id="trialDetailsParticipantsRemoveBt" layoutX="9.0" layoutY="89.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Remove participant" />
+                  <Button fx:id="trialDetailsParticipantsAddBt" layoutX="9.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#addParticipant" prefHeight="25.0" prefWidth="180.0" text="Add participant" />
+                  <Button fx:id="trialDetailsParticipantsModifyBt" layoutX="9.0" layoutY="125.0" mnemonicParsing="false" onMouseClicked="#modifyParticipant" prefHeight="25.0" prefWidth="180.0" text="Modify participant" />
+                  <Button fx:id="trialDetailsParticipantsRemoveBt" layoutX="9.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#removeParticipant" prefHeight="25.0" prefWidth="180.0" text="Remove participant" />
                   <Label layoutX="14.0" layoutY="174.0" text="ID:" />
                   <Label fx:id="trialDetailsIdLb" layoutX="94.0" layoutY="174.0" text="idhoder" />
                   <Label layoutX="14.0" layoutY="199.0" text="Trial type:" />

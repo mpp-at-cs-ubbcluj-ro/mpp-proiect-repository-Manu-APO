@@ -10,10 +10,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -30,6 +31,18 @@ public class RegistryTrialsDetailsController extends UnicastRemoteObject impleme
     ObservableList<Participant> modelParticipant = FXCollections.observableArrayList();
     Stage dashboardRegistryStage;
     Stage registryDetailsStage;
+
+    Stage addUpdateParticipantStage;
+    Parent rootAddUpdateParticipantWindow;
+    AddUpdateParticipantController addUpdateParticipantController;
+
+    @FXML
+    Button trialDetailsParticipantsAddBt;
+    @FXML
+    Button trialDetailsParticipantsModifyBt;
+    @FXML
+    Button trialDetailsParticipantsRemoveBt;
+
 
     @FXML
     TableView<Participant> trialDetailsParticipantsTv;
@@ -62,6 +75,9 @@ public class RegistryTrialsDetailsController extends UnicastRemoteObject impleme
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        addUpdateParticipantStage=new Stage();
+        addUpdateParticipantStage.setTitle("Participant crud");
+
         trialDetailsParticipantsIdCl.setCellValueFactory(new PropertyValueFactory<>("id"));
         trialDetailsParticipantsUsernameCl.setCellValueFactory(new PropertyValueFactory<>("username"));
         trialDetailsParticipantsFirstNameCl.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -113,6 +129,52 @@ public class RegistryTrialsDetailsController extends UnicastRemoteObject impleme
             }
             modelParticipant.setAll((Collection<? extends Participant>) list);
         });
+    }
+
+    public void setAddUpdateParticipantParent(AnchorPane root) {
+        rootAddUpdateParticipantWindow = root;
+        Scene scene = new Scene(rootAddUpdateParticipantWindow);
+        addUpdateParticipantStage.setScene(scene);
+    }
+    public void setAddUpdateParticipantController(AddUpdateParticipantController ctrl) {
+        addUpdateParticipantController = ctrl;
+    }
+
+    public void addParticipant(){
+        addUpdateParticipantController.setAtrributes(competitionServices, new Participant("","","",""), trial);
+        addUpdateParticipantStage.show();
+    }
+
+    public void removeParticipant(){
+        Participant participant = trialDetailsParticipantsTv.getSelectionModel().getSelectedItem();
+        if(participant != null){
+            try {
+                competitionServices.removeParticipantFromTrial(trial, participant);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Participant removed!");
+                alert.show();
+            } catch (CompetitionException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Select a participant");
+            alert.show();
+        }
+    }
+
+    public void modifyParticipant(){
+        Participant participant = trialDetailsParticipantsTv.getSelectionModel().getSelectedItem();
+        if(participant != null){
+            try {
+                competitionServices.modifyParticipantFromTrial(trial, participant);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Participant modified!");
+                alert.show();
+            } catch (CompetitionException e) {
+                e.printStackTrace();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Select a participant");
+            alert.show();
+        }
     }
 
 

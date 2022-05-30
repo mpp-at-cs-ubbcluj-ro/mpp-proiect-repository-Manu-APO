@@ -65,6 +65,26 @@ public class ParticipantDbRepositoryORM implements ParticipantRepository {
 
     @Override
     public Participant add(Participant entity) {
+//        try(Session session = sessionFactory.openSession()){
+//            Transaction transaction = null;
+//            try{
+//                transaction = session.beginTransaction();
+//
+//                Query qq = session.createQuery("From Participant where username=?1 and password=?2",Participant.class);
+//
+//                qq.setParameter(1,username).setParameter(2,password);
+//                System.out.println(qq);
+//                participant = (Participant) qq.uniqueResult();
+//                System.out.println(participant);
+//                transaction.commit();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//
+//                if(transaction !=null)
+//                    transaction.rollback();
+//            }
+//        }
+//        return participant;
         return null;
     }
 

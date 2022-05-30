@@ -16,5 +16,9 @@ public interface ICompetitionServices {
     void logoutParticipant(Participant participant, ICompetitionObserver client) throws CompetitionException;
 
     void logoutRegistry(Registry registry, ICompetitionObserver client) throws CompetitionException;
+
+    void addParticipantForTrial(TrialDTO trial,Participant participant) throws CompetitionException;
+    void removeParticipantFromTrial(TrialDTO trial,Participant participant) throws CompetitionException;
+    void modifyParticipantFromTrial(TrialDTO trial,Participant participant) throws CompetitionException;
 }
 
